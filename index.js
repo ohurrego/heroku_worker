@@ -2,6 +2,11 @@ const Consumer = require('sqs-consumer');
 const AWS = require('aws-sdk');
 var SConfig = require("./worker/sConfig");
 
+var express = require('express'),
+    apps = express(),
+    port = process.env.PORT || 3000,
+    bodyParser = require('body-parser')
+
 var SESCREDENTIALS = {
     accessKeyId: process.env.KEYID || '',
     secretAccessKey: process.env.SECRETKEYID || ''
@@ -29,7 +34,5 @@ const app = Consumer.create({
 app.on('error', (err) => {
     console.log(err.message);
 });
-const PORT = process.env.PORT || 3000;
-app.start(PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
-});
+apps.listen(port);
+app.start();
