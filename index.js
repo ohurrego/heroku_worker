@@ -25,6 +25,7 @@ const app = Consumer.create({
     sqs: new AWS.SQS()
 });
 
+
 app.on('error', (err) => {
     console.log(err.message);
 });
