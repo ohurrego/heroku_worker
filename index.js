@@ -29,4 +29,7 @@ const app = Consumer.create({
 app.on('error', (err) => {
     console.log(err.message);
 });
-app.start();
+const PORT = process.env.PORT || 3000;
+app.start(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
