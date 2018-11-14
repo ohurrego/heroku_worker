@@ -49,12 +49,13 @@ exports.fileToConverted = function(fileName, fileId) {
 
                         Updatedb.select(responseJson.fk_id_competition, function(item) {
                             console.log(item.address)
-                                // var mailOptions = {
-                                //     from: 'oh.urrego@uniandes.edu.co',
-                                //     to: responseJson.email,
-                                //     subject: 'Tu video ya fue cargado EXITOSAMENTE!!',
-                                //     text: 'Hola, te queremos decir que tu video ya fue procesado y cargado exitosamente. Revisalo en: http://d10pkk829h9oy.cloudfront.net/public/' + item.address.S + "/" + responseJson.fk_id_competition
-                                // };
+                            var emailText = "http://d10pkk829h9oy.cloudfront.net/public/" + item.address.S + "/" + responseJson.fk_id_competition;
+                            // var mailOptions = {
+                            //     from: 'oh.urrego@uniandes.edu.co',
+                            //     to: responseJson.email,
+                            //     subject: 'Tu video ya fue cargado EXITOSAMENTE!!',
+                            //     text: 'Hola, te queremos decir que tu video ya fue procesado y cargado exitosamente. Revisalo en: http://d10pkk829h9oy.cloudfront.net/public/' + item.address.S + "/" + responseJson.fk_id_competition
+                            // };
 
                             // transporter.sendMail(mailOptions, function(error, info) {
                             //     if (error) {
@@ -70,8 +71,8 @@ exports.fileToConverted = function(fileName, fileId) {
                                     },
                                     content: {
                                         from: 'testing@' + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
-                                        subject: 'Oh hey!',
-                                        html: '<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
+                                        subject: 'Tu Video ya esta publicado',
+                                        html: `<html><body><p> Hola, te queremos decir que tu video ya fue procesado y cargado exitosamente. Revisalo en: ${emailText} !</p></body></html>`
                                     },
                                     recipients: [
                                         { address: responseJson.email }
